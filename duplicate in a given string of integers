@@ -1,0 +1,12 @@
+arr=list(map(int,input().split()))
+rep=-1
+mset=dict()
+for i in range(len(arr)-1,-1,-1):
+    if arr[i] in mset.keys():
+        rep=i
+    else:
+        mset[arr[i]]=1
+if rep!=-1:
+    print(arr[rep])
+else:
+    print('no repeat ele')
