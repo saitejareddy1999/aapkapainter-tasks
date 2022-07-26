@@ -1,1 +1,196 @@
+------------------Two sum------------------------------
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        for i in range(len(nums)):
+            for j in range(i+1,len(nums)):
+                if nums[i]+nums[j] == target:
+                   return [i,j]  
+-------------------------------Roman to integer-------------------
+class Solution:
+    def romanToInt(self, s: str) -> int:
+        roman_map={'I':1,'V':5,'X':10,'L':50,'C':100,'D':500,'M':1000}
+        n=len(s)
+        count=roman_map[s[n-1]]
+        for i in range(n-2,-1,-1):
+            if roman_map[s[i]]>=roman_map[s[i+1]]:
+                count+=roman_map[s[i]]
+            else:
+                count-=roman_map[s[i]]
+        return count
+-------------------longest-common-prefix----------------------
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        lcp=""
+        if strs is None or len(strs)==0:
+            return lcp
+        minlength=len(strs[0])
+        for i in range(1,len(strs)):
+            minlength=min(minlength,len(strs[i]))
+        for i in range(0,minlength):
+            current=strs[0][i]
+            for j in range(0,len(strs)):
+                if strs[j][i]!=current:
+                    return lcp
+            lcp+=current   
+        return lcp
+-------------valid-parentheses---------------
+class Solution:
+    def isValid(self, s: str) -> bool:
+        leftsymbol=[]
+        for c in s:
+            if c in ['(','{','[']:
+                leftsymbol.append(c)
+            elif c==')' and len(leftsymbol)!=0 and leftsymbol[-1] == '(':
+                leftsymbol.pop()
+            elif c==']' and len(leftsymbol)!=0 and leftsymbol[-1] == '[':
+                leftsymbol.pop()
+            elif c=='}' and len(leftsymbol)!=0 and leftsymbol[-1] == '{':
+                leftsymbol.pop()
+            else:
+                return False
+        return leftsymbol==[]
+------------------------remove-duplicates-from-sorted-array-------------------
+class Solution:
+    def removeDuplicates(self, nums: List[int]) -> int:
+        count=0
+        for i in range(len(nums)):
+            if i<len(nums)-1 and nums[i] == nums[i+1]:
+                continue
+            nums[count]=nums[i]
+            count+=1
+        return count
+----------------------remove-element----------------
+class Solution:
+    def removeElement(self, nums: List[int], val: int) -> int:
+        count=0
+        for i in range(len(nums)):
+            if nums[i] !=val :
+                nums[count]=nums[i]
+                count+=1
+        return count
+---------------- Implement strStr()-------------------
+class Solution:
+    def strStr(self, haystack: str, needle: str) -> int:
+        if haystack is None and needle is None:
+            return -1
+        if haystack==needle:
+            return 0
+        needlelength=len(needle)
+        for i in range(len(haystack)-needlelength+1):
+            if haystack[i:i+needlelength]==needle:
+                return i
+        return -1
+ -----------------Plus One-------------------
+ class Solution:
+    def plusOne(self, digits: List[int]) -> List[int]:
+        num=""
+        for i in digits:
+            num+=str(i)
+        num=int(num)
+        num+=1
+        num=str(num)
+        digitslist=[]
+        for i in num:
+            digitslist.append(int(i))
+        return digitslist
+ --------------Add to Array-Form of Integer-------------
+class Solution:
+    def addToArrayForm(self, num: List[int], k: int) -> List[int]:
+        num1=""
+        for i in range(len(num)):
+            num1+=str(num[i])
+        
+        num=int(num1)+k
+    
+        num=str(num)
+        digitsList=[]
+        for i in num:
+            digitsList.append(i)
+        return digitsList
+---------------Sqrt(x)-----------------
+class Solution:
+    def mySqrt(self, x: int) -> int:
+        low=1
+        high=x+1
+        ans=0
+        while high>low:
+            mid=(high+low)//2
+            if mid*mid<=x:
+                low=mid+1
+                ans=mid
+            else:
+                high=mid
+        return ans
+----------------Valid Perfect Square-----------------------
+import math
+class Solution:
+    def isPerfectSquare(self, num: int) -> bool:
+        if num>0:
+            sr=int(math.sqrt(num))
+            return ((sr*sr==num))
+        return false
+        if isPerfectSquare(num):
+            print('true')
+        print('false')
+--------------------Valid Perfect Square----------------
+import math
+class Solution:
+    def isPerfectSquare(self, num: int) -> bool:
+        if num>0:
+            sr=int(math.sqrt(num))
+            return ((sr*sr==num))
+        return false
+        if isPerfectSquare(num):
+            print('true')
+        print('false')
+ --------------------Best Time to Buy and Sell Stock-------
+ class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        n=len(prices)
+        buy=prices[0]
+        max_profit=0
+        for i in range(1,n):
+            if buy > prices[i]:
+                buy=prices[i]
+            elif prices[i]-buy > max_profit:
+                max_profit=prices[i]-buy
+        return max_profit
+----------------Maximum Difference Between Increasing Elements--------------
+class Solution:
+    def maximumDifference(self, nums: List[int]) -> int:
+        vmin = nums[0]
+        dmax = 0
+        for i in range(len(nums)):
+            if (nums[i] < vmin):
+                vmin = nums[i]
+            elif (nums[i] - vmin > dmax):
+                dmax = nums[i] - vmin
+        return dmax
+------------------- Valid Palindrome--------------
+ class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        l,h=0,len(s)-1
+        s=s.lower()
+        while(l<=h):
+            if (not(s[l] >= 'a' and s[l] <= 'z')):
+                l += 1
+            elif (not(s[h] >= 'a' and s[h] <= 'z')):
+                h -= 1
+            elif (s[l] == s[h]):
+                l += 1
+                h -= 1
+            else:
+                return False
+        return True
+ --------------------Single Number------------
+ class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        res=0
+        for i in nums:
+            res=i^res
+        return res
 
+        
+        
+        
+        
